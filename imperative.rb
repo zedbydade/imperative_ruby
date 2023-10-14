@@ -11,11 +11,21 @@ class ImperativeBuilder
 
   def zero(_value); end
 
-  def delay(&block)
-    block.call
+  def delay(code)
+    code.call
   end
-end
 
-def test_puts
-  ImperativeBuilder.new("return 0 po 'after return' return 1")
+  def combine(code1, code2)
+    response = code1.call
+    return response unless response.nil?
+
+    code2.call
+  end
+
+  def run(imperative)
+    response = imperative.call
+    return response unless response.nil?
+
+    raise Exception 'nothing returned!'
+  end
 end
