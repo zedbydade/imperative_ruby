@@ -22,8 +22,8 @@ class ImperativeBuilder
     code2.call
   end
 
-  def run(imperative)
-    response = imperative.call
+  def run
+    response = expression.call
     return response unless response.nil?
 
     raise Exception 'nothing returned!'
